@@ -1,0 +1,15 @@
+{
+  "name": "mern-apollo",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "repository": "git@github.com-ehelgueroc:ehelgueroc/mern-apollo.git",
+  "author": "Esteban Helguero <esteban.helguero@s4rb.com>",
+  "scripts": {
+    "dev": "node server/index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
