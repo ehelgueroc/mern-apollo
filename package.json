@@ -6,10 +6,17 @@
   "repository": "git@github.com-ehelgueroc:ehelgueroc/mern-apollo.git",
   "author": "Esteban Helguero <esteban.helguero@s4rb.com>",
   "scripts": {
-    "dev": "node server/index.js"
+    "dev": "nodemon server/index.js"
   },
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "@apollo/server": "^4.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
   }
 }
