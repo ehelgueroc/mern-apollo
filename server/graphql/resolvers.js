@@ -1,5 +1,6 @@
 import Project from "../models/Project.js";
 import Task from "../models/Task.js";
+import User from "../models/User.js";
 
 export const resolvers = {
     Query: {
@@ -9,6 +10,9 @@ export const resolvers = {
         },
         tasks: async () => {
             return await Task.find()
+        },
+        users: async () => {
+            return await User.find()
         }
     },
     Mutation: {
@@ -28,8 +32,16 @@ export const resolvers = {
                 title,
                 projectId
             });
-            const savedTask = task.save();
+            const savedTask = await task.save();
             return savedTask;
+        },
+        createUser: async (_, {name, email}) => {
+            const user = new User({
+                name,
+                email
+            });
+            const savedUser = await user.save();
+            return savedUser;
         }
     }
 }
