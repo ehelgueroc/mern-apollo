@@ -5,15 +5,11 @@ import User from "../models/User.js";
 export const resolvers = {
     Query: {
         hello: () => "Hello",
-        projects: async () => {
-            return await Project.find()
-        },
-        tasks: async () => {
-            return await Task.find()
-        },
-        users: async () => {
-            return await User.find()
-        }
+        projects: async () => await Project.find(),
+        tasks: async () => await Task.find(),
+        users: async () => await User.find(),
+        project: async (_, { _id }) => await Project.findById(_id),
+        task: async (_, {_id}) => await Task.findById(_id)
     },
     Mutation: {
         createProject: async (_, {name, description}) => {
@@ -42,6 +38,16 @@ export const resolvers = {
             });
             const savedUser = await user.save();
             return savedUser;
+        },
+        deleteProject: async (_, {_id}) => {
+            const deletedProject = await Project.findByIdAndDelete(_id);
+            if(!deletedProject) throw new Error("Project was not found");
+            return deletedProject;
+        },
+        deleteTask: async (_, {_id}) => {
+            const deletedTask = await Task.findByIdAndDelete(_id);
+            if(!deletedTask) throw new Error("Task was not found");
+            return deletedTask;
         }
     }
 }
