@@ -42,12 +42,28 @@ export const resolvers = {
         deleteProject: async (_, {_id}) => {
             const deletedProject = await Project.findByIdAndDelete(_id);
             if(!deletedProject) throw new Error("Project was not found");
+            await Task.findBy({ projectId: deletedProject._id });
             return deletedProject;
         },
         deleteTask: async (_, {_id}) => {
             const deletedTask = await Task.findByIdAndDelete(_id);
             if(!deletedTask) throw new Error("Task was not found");
             return deletedTask;
+        },
+        updateProject: async (_, args) => {
+            const updatedProject = Project.findByIdAndUpdate(args._id, args, { new:true });
+            if(!updatedProject) throw new Error("Project was not found");
+            return updatedProject;
+        },
+        updateTask: async (_, args) => {
+            const updatedTask = Task.findByIdAndUpdate(args._id, args, { new:true });
+            if(!updatedTask) throw new Error("Task was not found");
+            return updatedTask;
+        },
+        updateUser: async (_, args) => {
+            const updatedUser = User.findByIdAndUpdate(args._id, args, { new:true });
+            if(!updatedUser) throw new Error("User was not found");
+            return updatedUser;
         }
     }
 }
