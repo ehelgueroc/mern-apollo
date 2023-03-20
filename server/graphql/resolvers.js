@@ -42,7 +42,7 @@ export const resolvers = {
         deleteProject: async (_, {_id}) => {
             const deletedProject = await Project.findByIdAndDelete(_id);
             if(!deletedProject) throw new Error("Project was not found");
-            await Task.findBy({ projectId: deletedProject._id });
+            await Task.find({ projectId: deletedProject._id });
             return deletedProject;
         },
         deleteTask: async (_, {_id}) => {
@@ -65,5 +65,11 @@ export const resolvers = {
             if(!updatedUser) throw new Error("User was not found");
             return updatedUser;
         }
+    },
+    Project: {
+        tasks: async (parent) => await Task.find({projectId: parent._id})
+    },
+    Task: {
+        project: async (parent) => await Project.findById(parent.projectId)
     }
 }
