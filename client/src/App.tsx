@@ -14,11 +14,13 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <Routes>
+      <div className="container m-auto h-screen flex items-center justify-center">
+      <Routes>
           <Route path="/" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetails />} />
           <Route path="/help" element={<Help />} />
         </Routes>
+      </div>
       </BrowserRouter>
     </ApolloProvider>
   )
