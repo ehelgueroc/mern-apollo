@@ -11,23 +11,25 @@ vi.mock('react-router-dom', () => ({
 }));
 
 describe('ProjectCard', () => {
-  beforeEach(() => {
-    const project = {
-      _id: "123",
-      name: "Test",
-      description: "This is a description"
-    };
-
-    render(<ProjectCard project={project} />);
-  });
-
-  it("should show the name and description of the project", () => {
-    expect(screen.getByText(/this is a description/i)).toBeInTheDocument();
-    expect(screen.getByText(/test/i)).toBeInTheDocument();
-  });
-
-  it("should navigate with the correct params", () => {
-    fireEvent.click(screen.getByText(/test/i));
-    expect(mockedUseNavigate).toBeCalledWith("/projects/123");
-  });
+  describe("when the correct props are passed", () => {
+    beforeEach(() => {
+      const project = {
+        _id: "123",
+        name: "Test",
+        description: "This is a description"
+      };
+  
+      render(<ProjectCard project={project} />);
+    });
+  
+    it("should show the name and description of the project", () => {
+      expect(screen.getByText(/this is a description/i)).toBeInTheDocument();
+      expect(screen.getByText(/test/i)).toBeInTheDocument();
+    });
+  
+    it("should navigate with the correct params", () => {
+      fireEvent.click(screen.getByText(/test/i));
+      expect(mockedUseNavigate).toBeCalledWith("/projects/123");
+    });
+  })
 });
